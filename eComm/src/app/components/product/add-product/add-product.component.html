@@ -1,0 +1,41 @@
+<div class="heading">
+    <h1>Add new product</h1>
+</div>
+<form [formGroup]="productDetails" autocomplete="off" novalidate (ngSubmit)="saveProduct(productDetails.value)">
+
+    <mat-form-field>
+        <mat-label>Product Name</mat-label>
+        <input matInput type="text" placeholder="Product name" formControlName="name" id="name">        
+    </mat-form-field>
+    <div *ngFor="let validation of validation_messages.name">
+        <mat-error *ngIf="f.name.hasError(validation.type) ">{{validation.message}}</mat-error>
+    </div>
+    <mat-form-field>
+        <mat-label>Product Price</mat-label>
+        <input matInput type="text" placeholder="Product price" formControlName="price" id="price">
+        <mat-hint align="end">You can enter the price upto 2 decimal places.</mat-hint>        
+    </mat-form-field>
+    <div *ngFor="let validation of validation_messages.price">
+        <mat-error *ngIf="f.price.hasError(validation.type) ">{{validation.message}}</mat-error>
+    </div>
+    <mat-form-field>
+        <mat-label>Product Type</mat-label>
+        <mat-select formControlName="type">
+            <mat-option [value]="productType.value" *ngFor="let productType of productTypes">{{productType.viewValue}}
+            </mat-option>
+        </mat-select>        
+    </mat-form-field>
+    <div *ngFor="let validation of validation_messages.type">
+        <mat-error *ngIf="f.type.hasError(validation.type) ">{{validation.message}}</mat-error>
+    </div>
+    <mat-button-toggle-group formControlName="isActive" appearance="legacy" #group="matButtonToggleGroup">
+        <mat-button-toggle *ngFor="let item of toggleOptions;" [value]="item.value">{{item.viewValue}}</mat-button-toggle>       
+    </mat-button-toggle-group>
+    <div *ngFor="let validation of validation_messages.isActive">
+        <mat-error *ngIf="f.isActive.hasError(validation.type) ">{{validation.message}}</mat-error>
+    </div>
+    <div class="action">
+        <button mat-raised-button color="accent" type="submit" [disabled]="!productDetails.valid">Save</button>
+    </div>
+
+</form>

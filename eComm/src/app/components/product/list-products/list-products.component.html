@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="center">
+    <div class="add-product">
+      <div class="rhs">
+        <button mat-raised-button color="black" routerLink="add">Add New Product</button>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="mat-elevation-z8 ">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+          </ng-container>
+
+          <!-- Price Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+            <td mat-cell *matCellDef="let element">{{element.price}}</td>
+          </ng-container>
+
+          <!-- Type Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+            <td mat-cell *matCellDef="let element">{{element.type}}</td>
+          </ng-container>
+
+          <!-- Active Column -->
+          <ng-container matColumnDef="isActive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let element">{{element.isActive}}</td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="action-button-container">
+                <div class="action-item">
+                  <button mat-mini-fab color="accent" (click)="action('edit',element)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+                <div class="action-item">
+                  <button mat-mini-fab color="warn" (click)="action('delete',element)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
