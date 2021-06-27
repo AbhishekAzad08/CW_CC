@@ -31,7 +31,7 @@ namespace eComm.Data.Migrations
                     { 2, true, "Time Travel", 10.05m, "Book" },
                     { 3, true, "TV", 520.05m, "Electronics" },
                     { 4, true, "Mobile", 1020.05m, "Electronics" },
-                    { 5, true, "Superman", 99.99m, "Toy" },
+                    { 5, true, "Superman", 99.99m, "Toys" },
                     { 6, true, "Cake", 20.05m, "Food" },
                     { 7, true, "Pizza", 10.99m, "Food" }
                 });

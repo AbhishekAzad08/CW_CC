@@ -80,7 +80,7 @@ namespace eComm.Data.Migrations
                             IsActive = true,
                             Name = "Superman",
                             Price = 99.99m,
-                            Type = "Toy"
+                            Type = "Toys"
                         },
                         new
                         {

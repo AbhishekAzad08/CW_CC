@@ -1,9 +1,6 @@
 ﻿using eComm.Data.Interfaces;
 using eComm.Data.Models;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +24,9 @@ namespace eComm.Data.Repositories
 
         public async Task<int> DeleteProduct(int id)
         {
-            var product = _productDbContext.Products.Where(x => x.ProductId == id).FirstOrDefault();
+            var product = _productDbContext.Products.FirstOrDefault(x => x.ProductId == id);
+            if (product == null)
+                return 0;
             _productDbContext.Products.Remove(product);
             return await _productDbContext.SaveChangesAsync();
         }
@@ -37,18 +36,18 @@ namespace eComm.Data.Repositories
                     select c).ToListAsync();
         }
 
-        public async Task<Product> GetProductById(int productID)
+        public async Task<Product> GetProductById(int productId)
         {
             return await (from c in _productDbContext.Products
-                    where c.ProductId == productID
+                    where c.ProductId == productId
                     select c).FirstOrDefaultAsync();
         }
 
         public async Task<int> UpdateProduct(Product product)
         {
-            Product selectedProduct= (from c in _productDbContext.Products
-                              where c.ProductId == product.ProductId
-                              select c).FirstOrDefault();
+            var selectedProduct = _productDbContext.Products.FirstOrDefault(x => x.ProductId == product.ProductId);
+            if (selectedProduct == null)
+                return 0;
             selectedProduct.Name = product.Name;
             selectedProduct.Price = product.Price;
             selectedProduct.Type = product.Type;

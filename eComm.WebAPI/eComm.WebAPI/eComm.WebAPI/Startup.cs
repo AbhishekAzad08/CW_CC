@@ -4,19 +4,12 @@ using eComm.Data.Interfaces;
 using eComm.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace eComm.WebAPI
 {
@@ -62,10 +55,13 @@ namespace eComm.WebAPI
             app.UseHttpsRedirection();
             app.UseSwagger();
 
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetRequiredService<ProductContext>();
-                context.Database.Migrate();
+                if (serviceScope != null)
+                {
+                    var context = serviceScope.ServiceProvider.GetRequiredService<ProductContext>();
+                    context.Database.Migrate();
+                }
             }
 
             app.UseSwaggerUI(c =>

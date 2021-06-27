@@ -1,8 +1,6 @@
 ﻿using eComm.Data.Interfaces;
 using eComm.Data.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace eComm.BusinessLayer.Services
@@ -30,9 +28,9 @@ namespace eComm.BusinessLayer.Services
             return await _productRepository.GetProducts();
         }
 
-        public async Task<Product> GetProductById(int productID)
+        public async Task<Product> GetProductById(int productId)
         {
-            return await _productRepository.GetProductById(productID);
+            return await _productRepository.GetProductById(productId);
         }
 
         public async Task<int> UpdateProduct(Product product)
