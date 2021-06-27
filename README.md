@@ -21,7 +21,8 @@ xUnit tests has been added for business layer methods.
 There are 2 components 
 i)  eComm (Angular) 
 ii) eComm.WebApi (.Net Core)
-Open the .sln file from WebAPI folder. Update the connection string in the eComm.WebAPI project. Run the solution. Database will be seeded with few products.
+
+Open the .sln file in Visual Studio 2019 from WebAPI folder. Update the connection string in the eComm.WebAPI project. Run the solution. Database will be seeded with few products.
 Run the Angular project using ng serve command
 
 # Runing the Unit tests
